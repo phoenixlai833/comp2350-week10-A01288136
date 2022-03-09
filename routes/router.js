@@ -4,6 +4,7 @@ const router = require('express').Router();
 //const dbModel = include('staticData');
 
 const userModel = include('models/web_user');
+const petModel = include('models/pet');
 const crypto = require('crypto');
 const {v4: uuid} = require('uuid');
 const passwordPepper = "SeCretPeppa4MySal+"
@@ -73,6 +74,27 @@ router.post('/addUser', async (req, res) => {
 		res.render('error', {message: 'Error connecting to MySQL'});
 			console.log("Error connecting to MySQL");
 	console.log(ex);
+	}
+});
+
+
+router.get('/pets', async (req, res) => {
+	console.log("page hit");
+	try {
+		const pets = await petModel.findAll({attributes: ['name']}); //{where: {web_user_id: 1}}
+		if (users === null) {
+			res.render('error', {message: 'Error connecting to MySQL'});
+			console.log("Error connecting to userModel");
+		}
+		else {
+			console.log(pets);
+			res.render('index', {allPets: pets});
+		}
+	}
+	catch(ex) {
+		res.render('error', {message: 'Error connecting to MySQL'});
+		console.log("Error connecting to MySQL");
+		console.log(ex);
 	}
 });
 
