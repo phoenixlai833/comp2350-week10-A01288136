@@ -1,7 +1,7 @@
 const {Sequelize, DataTypes} = require('sequelize');
 const databaseConnectionString = include('/databaseConnectionSequelize');
 const sequelize = new Sequelize(databaseConnectionString);
-const userModel = sequelize.define('pet_type',
+const typeModel = sequelize.define('pet_type',
 {pet_type_id: {type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false},
 type: {type: Sequelize.STRING, allowNull: false}
 },
